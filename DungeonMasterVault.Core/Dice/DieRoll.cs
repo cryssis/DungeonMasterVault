@@ -66,7 +66,7 @@ namespace DungeonMasterVault.Core.Dice
         }
 
         /// <summary>
-        /// Gets a Random generator for this DieRoll.
+        /// Gets the Random generator for this DieRoll.
         /// </summary>
         public static Random Random
         {
@@ -137,7 +137,7 @@ namespace DungeonMasterVault.Core.Dice
         }
 
         /// <summary>
-        /// Gets or sets return a DieRollElement for the main Roll of the DieRoll
+        /// Gets or sets the DieRollElement for the main Roll of the DieRoll
         /// </summary>
         [JsonIgnore]
         public DieRollElement Element
@@ -155,7 +155,7 @@ namespace DungeonMasterVault.Core.Dice
         }
 
         /// <summary>
-        /// Gets or sets other rolls that sum up to this roll.
+        /// Gets or sets the other rolls that sum up to this roll.
         /// </summary>
         [JsonIgnore]
         public List<DieRollElement> ExtraRolls
@@ -175,7 +175,7 @@ namespace DungeonMasterVault.Core.Dice
         }
 
         /// <summary>
-        /// Gets or sets all the Dice Roll that sums this roll.
+        /// Gets or sets the all the Dice Roll that sums this roll.
         /// </summary>
         [JsonIgnore]
         public List<DieRollElement> AllRolls
