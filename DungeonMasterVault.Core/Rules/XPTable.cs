@@ -13,9 +13,6 @@ namespace DungeonMasterVault.Core.Rules
     /// </summary>
     public static class XPTable
     {
-        /// <summary>
-        /// A dictionary of XP values by CR
-        /// </summary>
         private static Dictionary<string, int> xpTable;
 
         /// <summary>

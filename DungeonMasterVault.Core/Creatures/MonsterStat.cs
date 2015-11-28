@@ -4,7 +4,7 @@
 // See LICENSE file in the project root for full license information.
 // </copyright>
 
-namespace DungeonMasterVault.Core.Monsters
+namespace DungeonMasterVault.Core.Creatures
 {
     using System.Runtime.Serialization;
     using DungeonMasterVault.Core.Rules;
@@ -16,29 +16,10 @@ namespace DungeonMasterVault.Core.Monsters
     /// </summary>
     public class MonsterStat : BindableBase
     {
-        /// <summary>
-        /// Private storage for Name
-        /// </summary>
         private string name;
-
-        /// <summary>
-        /// Private storage for ChallengeRating
-        /// </summary>
         private string cr;
-
-        /// <summary>
-        /// Private storage for Experience Points
-        /// </summary>
         private string xp;
-
-        /// <summary>
-        /// Private storage for Hit Dice
-        /// </summary>
         private string hd;
-
-        /// <summary>
-        /// Private storage for HitPoints
-        /// </summary>
         private int hp;
 
         /// <summary>
