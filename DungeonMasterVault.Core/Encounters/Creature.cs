@@ -1,4 +1,4 @@
-﻿// <copyright file="Actor.cs" company="Roberto Sobreviela">
+﻿// <copyright file="Creature.cs" company="Roberto Sobreviela">
 // Copyright (c) Roberto Sobreviela. All rights reserved.
 // Licensed under the MIT license.
 // See LICENSE file in the project root for full license information.

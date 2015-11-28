@@ -30,7 +30,7 @@ namespace DungeonMasterVault.Core.Dice
         public int Mod { get; set; }
 
         /// <summary>
-        /// Gets or sets a list of results of several dice rolls.
+        /// Gets or sets the list of results of several dice rolls.
         /// </summary>
         [DataMember]
         public List<DieResult> Rolls { get; set; }
