@@ -110,6 +110,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Creatures\MonsterStat.cs" />
+    <Compile Include="Dice\DieResult.cs" />
+    <Compile Include="Dice\DieRoll.cs" />
+    <Compile Include="Dice\DieRollElement.cs" />
+    <Compile Include="Dice\RollResult.cs" />
+    <Compile Include="Encounters\Creature.cs" />
+    <Compile Include="Encounters\Encounter.cs" />
+    <Compile Include="Encounters\InitiativeCount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\XPTable.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
