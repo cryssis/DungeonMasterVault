@@ -21,8 +21,8 @@ namespace DungeonMasterVault.Mvvm.ViewModels
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            // SimpleIoc.Default.Register<EncountersPageViewModel>();
-            // SimpleIoc.Default.Register<EncounterDetailPageViewModel>();
+            SimpleIoc.Default.Register<EncountersViewModel>();
+            SimpleIoc.Default.Register<EncounterDetailViewModel>();
         }
     }
 }

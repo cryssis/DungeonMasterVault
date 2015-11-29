@@ -11,9 +11,7 @@ namespace DungeonMasterVault.Core.Dice
     using System.Linq;
     using System.Runtime.Serialization;
     using System.Text.RegularExpressions;
-    using DungeonMasterVault.Core.Dice;
     using DungeonMasterVault.Core.Utils;
-    using DungeonsMasterVault.Core.Dice;
     using Newtonsoft.Json;
 
     /// <summary>

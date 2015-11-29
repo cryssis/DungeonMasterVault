@@ -1,10 +1,8 @@
 ﻿{
   "dependencies": {
-    "Documentation.Analyser": "1.0.5809.11172",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "MvvmLightLibs": "5.2.0",
     "Newtonsoft.Json": "7.0.1",
-    "StyleCop.Analyzers": "1.0.0-beta017",
     "Template10": "1.0.8"
   },
   "frameworks": {
