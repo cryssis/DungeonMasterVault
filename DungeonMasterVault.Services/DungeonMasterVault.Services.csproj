@@ -117,8 +117,17 @@
     <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataServices\DesignTimeDataService.cs" />
+    <Compile Include="DataServices\IDataService.cs" />
+    <Compile Include="DataServices\SampleDataService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Properties\DungeonMasterVault.Services.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DungeonMasterVault.Core\DungeonMasterVault.Core.csproj">
+      <Project>{83f264c2-2091-4e68-a8e0-5b61a61340bf}</Project>
+      <Name>DungeonMasterVault.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
