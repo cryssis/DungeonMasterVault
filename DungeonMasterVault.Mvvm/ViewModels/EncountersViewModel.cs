@@ -8,7 +8,7 @@ namespace DungeonMasterVault.Mvvm.ViewModels
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using DragonSphere.Core.Encounters;
+    using DungeonMasterVault.Core.Encounters;
     using GalaSoft.MvvmLight.Command;
 
     /// <summary>

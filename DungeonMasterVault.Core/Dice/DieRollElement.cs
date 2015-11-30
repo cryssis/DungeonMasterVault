@@ -4,9 +4,8 @@
 // See LICENSE file in the project root for full license information.
 // </copyright>
 
-namespace DungeonsMasterVault.Core.Dice
+namespace DungeonMasterVault.Core.Dice
 {
-    using DungeonMasterVault.Core.Dice;
     using Newtonsoft.Json;
     using Template10.Mvvm;
 

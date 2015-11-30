@@ -4,12 +4,11 @@
 // See LICENSE file in the project root for full license information.
 // </copyright>
 
-namespace DragonSphere.Core.Encounters
+namespace DungeonMasterVault.Core.Encounters
 {
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Runtime.Serialization;
-    using DungeonMasterVault.Core.Encounters;
     using Template10.Mvvm;
 
     /// <summary>

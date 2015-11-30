@@ -8,7 +8,7 @@ namespace DungeonMasterVault.Mvvm.ViewModels
 {
     using System.Collections.Generic;
     using System.Linq;
-    using DragonSphere.Core.Encounters;
+    using DungeonMasterVault.Core.Encounters;
     using Windows.UI.Xaml.Navigation;
 
     /// <summary>
