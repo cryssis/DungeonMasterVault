@@ -64,7 +64,7 @@
         <GridView x:Name="EncounterGridView"
                   Grid.Row="1"
                   ItemTemplate="{StaticResource EncounterListTemplate}"
-                  ItemsSource="{Binding TestEncounters}"
+                  ItemsSource="{Binding Encounters}"
                   Margin="19,12,19,0"
                   VerticalAlignment="Top"
                   HorizontalAlignment="Left"
