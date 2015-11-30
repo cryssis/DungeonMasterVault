@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace DungeonMasterVault.UWP.ViewModels
 {
-    public class MainPageViewModel : Mvvm.ViewModelBase
+    public class MainPageViewModel : DungeonMasterVault.Mvvm.ViewModels.ViewModelBase
     {
         public MainPageViewModel()
         {
@@ -12,7 +12,7 @@ namespace DungeonMasterVault.UWP.ViewModels
                 Value = "Designtime value";
         }
 
-        string _Value = string.Empty;
+        private string _Value = string.Empty;
         public string Value { get { return _Value; } set { Set(ref _Value, value); } }
 
         public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -43,7 +43,5 @@ namespace DungeonMasterVault.UWP.ViewModels
         {
             NavigationService.Navigate(typeof(Views.SettingsPage), 2);
         }
-
     }
 }
-

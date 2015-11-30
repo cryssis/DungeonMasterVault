@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace DungeonMasterVault.UWP.ViewModels
 {
-    public class DetailPageViewModel : DungeonMasterVault.UWP.Mvvm.ViewModelBase
+    public class DetailPageViewModel : DungeonMasterVault.Mvvm.ViewModels.ViewModelBase
     {
         public DetailPageViewModel()
         {
@@ -46,4 +46,3 @@ namespace DungeonMasterVault.UWP.ViewModels
         }
     }
 }
-

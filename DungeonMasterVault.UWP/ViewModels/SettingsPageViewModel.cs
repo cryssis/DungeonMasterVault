@@ -3,15 +3,15 @@ using Windows.UI.Xaml;
 
 namespace DungeonMasterVault.UWP.ViewModels
 {
-    public class SettingsPageViewModel : DungeonMasterVault.UWP.Mvvm.ViewModelBase
+    public class SettingsPageViewModel : DungeonMasterVault.Mvvm.ViewModels.ViewModelBase
     {
         public SettingsPartViewModel SettingsPartViewModel { get; } = new SettingsPartViewModel();
         public AboutPartViewModel AboutPartViewModel { get; } = new AboutPartViewModel();
     }
 
-    public class SettingsPartViewModel : Mvvm.ViewModelBase
+    public class SettingsPartViewModel : DungeonMasterVault.Mvvm.ViewModels.ViewModelBase
     {
-        Services.SettingsServices.SettingsService _settings;
+        private Services.SettingsServices.SettingsService _settings;
 
         public SettingsPartViewModel()
         {
@@ -32,6 +32,7 @@ namespace DungeonMasterVault.UWP.ViewModels
         }
 
         private string _BusyText = "Please wait...";
+
         public string BusyText
         {
             get { return _BusyText; }
@@ -49,7 +50,7 @@ namespace DungeonMasterVault.UWP.ViewModels
         }
     }
 
-    public class AboutPartViewModel : Mvvm.ViewModelBase
+    public class AboutPartViewModel : DungeonMasterVault.Mvvm.ViewModels.ViewModelBase
     {
         public Uri Logo => Windows.ApplicationModel.Package.Current.Logo;
 
@@ -69,4 +70,3 @@ namespace DungeonMasterVault.UWP.ViewModels
         public Uri RateMe => new Uri("http://bing.com");
     }
 }
-
