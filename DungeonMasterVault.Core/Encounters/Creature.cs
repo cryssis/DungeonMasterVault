@@ -8,8 +8,8 @@ namespace DungeonMasterVault.Core.Encounters
 {
     using System;
     using System.Runtime.Serialization;
-    using Creatures;
     using Dice;
+    using Monsters;
     using Newtonsoft.Json;
     using Template10.Mvvm;
 

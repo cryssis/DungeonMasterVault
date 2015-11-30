@@ -4,11 +4,11 @@
 // See LICENSE file in the project root for full license information.
 // </copyright>
 
-namespace DungeonMasterVault.Core.Creatures
+namespace DungeonMasterVault.Core.Monsters
 {
     using System.Runtime.Serialization;
-    using DungeonMasterVault.Core.Rules;
     using Newtonsoft.Json;
+    using Rules;
     using Template10.Mvvm;
 
     /// <summary>
