@@ -10,8 +10,6 @@ namespace DungeonMasterVault.Mvvm.ViewModels
     using System.Collections.ObjectModel;
     using DungeonMasterVault.Core.Encounters;
     using GalaSoft.MvvmLight.Command;
-    using Services.DataServices;
-    using Windows.UI.Xaml.Navigation;
 
     /// <summary>
     /// A ViewModel for a encounters collection
@@ -20,18 +18,19 @@ namespace DungeonMasterVault.Mvvm.ViewModels
     {
         private ObservableCollection<Encounter> encounters;
         private RelayCommand<Encounter> selectEncounterCommand;
-        private readonly IDataService dataService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EncountersViewModel"/> class.
         /// </summary>
-        public EncountersViewModel(IDataService dataService)
+        public EncountersViewModel()
         {
-            this.dataService = dataService;
-
-            if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
+            if (this.IsInDesignMode)
             {
-                encounters = new ObservableCollection<Encounter>(dataService.GetEncounters());
+                this.LoadDesignTimeData();
+            }
+            else
+            {
+                this.encounters = new ObservableCollection<Encounter>(this.GetSampleRuntimeItems());
             }
         }
 
@@ -63,18 +62,42 @@ namespace DungeonMasterVault.Mvvm.ViewModels
             }
         }
 
-        /// <summary>
-        /// Implementation of OnNavigatedTo
-        /// </summary>
-        /// <param name="parameter">The parameters of the navigation</param>
-        /// <param name="mode">The navigation Mode</param>
-        /// <param name="state">THe state of the app</param>
-        public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        /// <inheritdoc/>
+        protected override void LoadDesignTimeData()
         {
-            // Load real data
-            encounters = new ObservableCollection<Encounter>(dataService.GetEncounters());
+            base.LoadDesignTimeData();
 
-            base.OnNavigatedTo(parameter, mode, state);
+            for (var i = 1; i < 10; i++)
+            {
+                var encounter = new Encounter()
+                {
+                    ID = "DS" + i.ToString(),
+                    Name = "DS" + i.ToString() + ". Design Time Encounter",
+                    Adventure = "Design Adventure"
+                };
+                this.Encounters.Add(encounter);
+            }
+        }
+
+        /// <summary>
+        /// Gets a list of sample encounters for runtime
+        /// </summary>
+        /// <returns>A list of sample encounters</returns>
+        private List<Encounter> GetSampleRuntimeItems()
+        {
+            var encounters = new List<Encounter>();
+            for (var i = 1; i < 35; i++)
+            {
+                var encounter = new Encounter()
+                {
+                    ID = "R" + i,
+                    Name = "R" + i + ". Sample Encounter",
+                    Adventure = "Runtime Adventure"
+                };
+                encounters.Add(encounter);
+            }
+
+            return encounters;
         }
     }
 }

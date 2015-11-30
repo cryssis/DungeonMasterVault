@@ -9,7 +9,6 @@ namespace DungeonMasterVault.Mvvm.ViewModels
     using System.Collections.Generic;
     using System.Linq;
     using DungeonMasterVault.Core.Encounters;
-    using Services.DataServices;
     using Windows.UI.Xaml.Navigation;
 
     /// <summary>
@@ -18,18 +17,15 @@ namespace DungeonMasterVault.Mvvm.ViewModels
     public class EncounterDetailViewModel : ViewModelBase
     {
         private Encounter selectedEncounter;
-        private IDataService dataService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EncounterDetailViewModel"/> class.
         /// </summary>
-        public EncounterDetailViewModel(IDataService dataService)
+        public EncounterDetailViewModel()
         {
-            this.dataService = dataService;
-
-            if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
+            if (this.IsInDesignMode)
             {
-                selectedEncounter = dataService.GetEncounter(string.Empty);
+                this.LoadDesignTimeData();
             }
         }
 
@@ -53,7 +49,43 @@ namespace DungeonMasterVault.Mvvm.ViewModels
             base.OnNavigatedTo(parameter, mode, state);
 
             string id = (string)parameter;
-            this.SelectedEncounter = dataService.GetEncounter(id);
+            var encounters = this.GetSampleRuntimeItems();
+            var e = encounters.Where(x => x.ID == id).FirstOrDefault();
+            this.SelectedEncounter = e;
+        }
+
+        /// <inheritdoc/>
+        protected override void LoadDesignTimeData()
+        {
+            base.LoadDesignTimeData();
+
+            this.SelectedEncounter = new Encounter()
+            {
+                ID = "DS" + 1,
+                Name = "DS" + 1 + ". Design Time Encounter",
+                Adventure = "Design Adventure"
+            };
+        }
+
+        /// <summary>
+        /// Gets a List of the sample runtime encounters.
+        /// </summary>
+        /// <returns>A List of Sample encounters</returns>
+        private List<Encounter> GetSampleRuntimeItems()
+        {
+            var encounters = new List<Encounter>();
+            for (var i = 1; i < 35; i++)
+            {
+                var encounter = new Encounter()
+                {
+                    ID = "R" + i,
+                    Name = "R" + i + ". Sample Encounter",
+                    Adventure = "Runtime Adventure"
+                };
+                encounters.Add(encounter);
+            }
+
+            return encounters;
         }
     }
 }
