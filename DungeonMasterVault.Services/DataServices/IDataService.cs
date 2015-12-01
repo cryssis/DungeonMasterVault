@@ -3,6 +3,9 @@
     using System.Collections.Generic;
     using DungeonMasterVault.Core.Encounters;
 
+    /// <summary>
+    /// A Data Service
+    /// </summary>
     public interface IDataService
     {
         /// <summary>

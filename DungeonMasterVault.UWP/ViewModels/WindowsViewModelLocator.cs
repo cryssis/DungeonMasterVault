@@ -23,24 +23,24 @@ namespace DungeonMasterVault.UWP.ViewModels
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<SettingsViewModel>();
+            SimpleIoc.Default.Register<MainPageViewModel>();
+            SimpleIoc.Default.Register<SettingsPageViewModel>();
         }
 
         /// <summary>
         /// Gets the Main Page View Model.
         /// </summary>
-        public MainViewModel MainPage
+        public MainPageViewModel MainPage
         {
-            get { return ServiceLocator.Current.GetInstance<MainViewModel>(); }
+            get { return ServiceLocator.Current.GetInstance<MainPageViewModel>(); }
         }
 
         /// <summary>
         /// Gets the Settings Page View Model.
         /// </summary>
-        public SettingsViewModel SettingsPage
+        public SettingsPageViewModel SettingsPage
         {
-            get { return ServiceLocator.Current.GetInstance<SettingsViewModel>(); }
+            get { return ServiceLocator.Current.GetInstance<SettingsPageViewModel>(); }
         }
     }
 }

@@ -7,11 +7,11 @@
       xmlns:controls="using:Template10.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:DungeonMasterVault.UWP.Views"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:vm="using:DungeonMasterVault.UWP.ViewModels" mc:Ignorable="d">
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+      xmlns:vm="using:DungeonMasterVault.UWP.ViewModels">
 
     <Page.DataContext>
-        <vm:SettingsPageViewModel />
+        <Binding Path="SettingsPage" Source="{StaticResource ViewModelLocator}" />
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
