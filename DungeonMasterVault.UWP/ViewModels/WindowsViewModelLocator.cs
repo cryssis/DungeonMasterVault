@@ -30,17 +30,11 @@ namespace DungeonMasterVault.UWP.ViewModels
         /// <summary>
         /// Gets the Main Page View Model.
         /// </summary>
-        public MainPageViewModel MainPage
-        {
-            get { return ServiceLocator.Current.GetInstance<MainPageViewModel>(); }
-        }
+        public MainPageViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainPageViewModel>();
 
         /// <summary>
         /// Gets the Settings Page View Model.
         /// </summary>
-        public SettingsPageViewModel SettingsPage
-        {
-            get { return ServiceLocator.Current.GetInstance<SettingsPageViewModel>(); }
-        }
+        public SettingsPageViewModel SettingsViewModel => ServiceLocator.Current.GetInstance<SettingsPageViewModel>();
     }
 }

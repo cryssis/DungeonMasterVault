@@ -8,11 +8,8 @@
     xmlns:controls="using:Template10.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
-    xmlns:local="using:DungeonMasterVault.UWP.Views">
-
-    <Page.DataContext>
-        <Binding Path="MainPage" Source="{StaticResource ViewModelLocator}" />
-    </Page.DataContext>
+    xmlns:local="using:DungeonMasterVault.UWP.Views"
+    DataContext="{Binding Source={StaticResource Locator}, Path=MainViewModel}">
 
     <Grid x:Name="Main" Background="{StaticResource MainPageBackgroundImage}">
 

@@ -8,11 +8,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:DungeonMasterVault.UWP.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
-      xmlns:vm="using:DungeonMasterVault.UWP.ViewModels">
-
-    <Page.DataContext>
-        <Binding Path="SettingsPage" Source="{StaticResource ViewModelLocator}" />
-    </Page.DataContext>
+      DataContext="{Binding Source={StaticResource Locator}, Path=SettingsViewModel}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 

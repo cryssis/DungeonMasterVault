@@ -6,14 +6,12 @@
     xmlns:core="using"
     xmlns:controls="using:Template10.Controls"
     xmlns:local="using:DungeonMasterVault.UWP"
-    xmlns:vm="using:DungeonMasterVault.UWP.ViewModels"
-    xmlns:convert="using:DungeonMasterVault.Mvvm.Converters"
     RequestedTheme="Dark">
 
     <Application.Resources>
         <ResourceDictionary>
-            <vm:WindowsViewModelLocator x:Key="ViewModelLocator" />
-            <convert:ItemClickEventArgsConverter x:Key="ItemClickEventArgsConverter" />
+            <vm:WindowsViewModelLocator x:Key="Locator" xmlns:vm="using:DungeonMasterVault.UWP.ViewModels" />
+            <convert:ItemClickEventArgsConverter x:Key="ItemClickEventArgsConverter" xmlns:convert="using:DungeonMasterVault.Mvvm.Converters" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles\Custom.xaml" />
                 <ResourceDictionary Source="Styles\Encounters.xaml" />
