@@ -20,7 +20,7 @@ namespace DungeonMasterVault.Mvvm.ViewModels
         /// </summary>
         public SettingsPartGeneralViewModel()
         {
-            if (!this.IsInDesignMode)
+            if (!GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
                 this.settings = UWP.Services.SettingsServices.SettingsService.Instance;
             }

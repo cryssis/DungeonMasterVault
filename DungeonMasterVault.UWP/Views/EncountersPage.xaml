@@ -60,12 +60,26 @@
         </controls:PageHeader>
         <GridView x:Name="EncounterGridView"
                   Grid.Row="1"
-                  ItemTemplate="{StaticResource EncounterListTemplate}"
                   ItemsSource="{Binding Encounters}"
                   Margin="19,12,19,0"
                   VerticalAlignment="Top"
                   HorizontalAlignment="Left"
                   IsItemClickEnabled="True">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="110" Width="360" Margin="10" Background="{ThemeResource EncounterItemBackgroundBrush}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextBlockStyle}" />
+                            <TextBlock Text="{Binding Adventure}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="NoWrap" />
+                            <TextBlock Text="{Binding Budget}" Style="{StaticResource CaptionTextBlockStyle}" />
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="ItemClick">
                     <core:InvokeCommandAction Command="{Binding GoToEncounterCommand}"

@@ -31,7 +31,7 @@ namespace DungeonMasterVault.Mvvm.ViewModels
 
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
-                encounters = new ObservableCollection<Encounter>(dataService.GetEncounters());
+                Encounters = new ObservableCollection<Encounter>(dataService.GetEncounters());
             }
         }
 
@@ -72,7 +72,7 @@ namespace DungeonMasterVault.Mvvm.ViewModels
         public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             // Load real data
-            encounters = new ObservableCollection<Encounter>(dataService.GetEncounters());
+            Encounters = new ObservableCollection<Encounter>(dataService.GetEncounters());
 
             base.OnNavigatedTo(parameter, mode, state);
         }
