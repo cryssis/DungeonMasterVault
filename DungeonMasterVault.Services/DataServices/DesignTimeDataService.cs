@@ -19,7 +19,8 @@
             {
                 ID = "DS" + 1,
                 Name = "DS" + 1 + ". Design Time Encounter",
-                Adventure = "Design Adventure"
+                Adventure = "Design Adventure",
+                Budget = new long?(100)
             };
         }
 
@@ -36,7 +37,8 @@
                 {
                     ID = "DS" + i.ToString(),
                     Name = "DS" + i.ToString() + ". Design Time Encounter",
-                    Adventure = "Design Adventure"
+                    Adventure = "Design Adventure",
+                    Budget = new long?(100)
                 };
                 encounters.Add(encounter);
             }
