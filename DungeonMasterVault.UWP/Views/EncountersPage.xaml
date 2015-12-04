@@ -68,7 +68,7 @@
                   IsItemClickEnabled="True">
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="ItemClick">
-                    <core:InvokeCommandAction Command="{Binding SelectEncounterCommand}"
+                    <core:InvokeCommandAction Command="{Binding GoToEncounterCommand}"
                                               InputConverter="{StaticResource ItemClickEventArgsConverter}" />
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
