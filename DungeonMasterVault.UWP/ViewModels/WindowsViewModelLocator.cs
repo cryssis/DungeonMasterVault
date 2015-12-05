@@ -6,6 +6,7 @@
 
 namespace DungeonMasterVault.UWP.ViewModels
 {
+    using DungeonMasterVault.Services.DataServices;
     using GalaSoft.MvvmLight.Ioc;
     using Microsoft.Practices.ServiceLocation;
     using Mvvm.ViewModels;
@@ -23,24 +24,29 @@ namespace DungeonMasterVault.UWP.ViewModels
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<SettingsViewModel>();
+            if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
+            {
+                // Design Time
+                SimpleIoc.Default.Register<IDataService, DesignTimeDataService>();
+            }
+            else
+            {
+                // Runtime
+                SimpleIoc.Default.Register<IDataService, SampleDataService>();
+            }
+
+            SimpleIoc.Default.Register<MainPageViewModel>();
+            SimpleIoc.Default.Register<SettingsPageViewModel>();
         }
 
         /// <summary>
         /// Gets the Main Page View Model.
         /// </summary>
-        public MainViewModel MainPage
-        {
-            get { return ServiceLocator.Current.GetInstance<MainViewModel>(); }
-        }
+        public MainPageViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainPageViewModel>();
 
         /// <summary>
         /// Gets the Settings Page View Model.
         /// </summary>
-        public SettingsViewModel SettingsPage
-        {
-            get { return ServiceLocator.Current.GetInstance<SettingsViewModel>(); }
-        }
+        public SettingsPageViewModel SettingsViewModel => ServiceLocator.Current.GetInstance<SettingsPageViewModel>();
     }
 }

@@ -11,7 +11,7 @@ namespace DungeonMasterVault.Mvvm.ViewModels
     /// <summary>
     /// A ViewModel for the Main Page
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    public class MainPageViewModel : ViewModelBase
     {
         private RelayCommand navigateToAboutCommand;
 

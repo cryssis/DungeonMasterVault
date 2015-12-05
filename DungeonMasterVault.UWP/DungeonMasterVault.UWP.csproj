@@ -104,11 +104,10 @@
     <Compile Include="Services\SettingsServices\ISettingsService.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.Apply.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPartAboutViewModel.cs" />
     <Compile Include="ViewModels\SettingsPartGeneralViewModel.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\WindowsViewModelLocator.cs" />
     <Compile Include="Views\EncounterDetailPage.xaml.cs">
       <DependentUpon>EncounterDetailPage.xaml</DependentUpon>
@@ -189,11 +188,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Strings\" />
-  </ItemGroup>
-  <ItemGroup>
-    <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
-      <Name>BehaviorsXamlSDKManaged</Name>
-    </SDKReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DungeonMasterVault.Core\DungeonMasterVault.Core.csproj">

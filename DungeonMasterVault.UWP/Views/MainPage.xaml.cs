@@ -26,6 +26,6 @@ namespace DungeonMasterVault.UWP.Views
         /// <summary>
         /// Gets the strongly-type view model to enable x:bind.
         /// </summary>
-        public MainViewModel ViewModel => this.DataContext as MainViewModel;
+        public MainPageViewModel ViewModel => this.DataContext as MainPageViewModel;
     }
 }

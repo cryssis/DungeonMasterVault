@@ -1,26 +1,12 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:DungeonVaultMaster.UWP.Styles">
+    xmlns:controls="using:Template10.Controls"
+    xmlns:local="using:DungeonMasterVault.UWP">
 
     <Color x:Key="EncounterItemColor">Black</Color>
     <SolidColorBrush x:Key="EncounterItemColorBrush" Color="{StaticResource EncounterItemColor}" />
     <SolidColorBrush x:Key="EncounterItemBackgroundBrush" Color="{StaticResource EncounterItemColor}" Opacity="0.40" />
 
     <ImageBrush x:Key="EncountersBackgroundImage" ImageSource="ms-appx:///Assets/Background/EncountersPageBackground.png" Stretch="UniformToFill" />
-
-    <DataTemplate x:Key="EncounterListTemplate">
-        <Grid Height="110" Width="360" Margin="10"
-            Background="{ThemeResource EncounterItemBackgroundBrush}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextBlockStyle}" />
-                <TextBlock Text="{Binding Adventure}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="NoWrap" />
-                <TextBlock Text="{Binding Budget}" Style="{StaticResource CaptionTextBlockStyle}" />
-            </StackPanel>
-        </Grid>
-    </DataTemplate>
 </ResourceDictionary>

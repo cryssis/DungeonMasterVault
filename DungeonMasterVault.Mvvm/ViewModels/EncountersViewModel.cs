@@ -19,7 +19,7 @@ namespace DungeonMasterVault.Mvvm.ViewModels
     public class EncountersViewModel : ViewModelBase
     {
         private ObservableCollection<Encounter> encounters;
-        private RelayCommand<Encounter> selectEncounterCommand;
+        private RelayCommand<Encounter> gotoEncounterCommand;
         private readonly IDataService dataService;
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace DungeonMasterVault.Mvvm.ViewModels
 
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
-                encounters = new ObservableCollection<Encounter>(dataService.GetEncounters());
+                Encounters = new ObservableCollection<Encounter>(dataService.GetEncounters());
             }
         }
 
@@ -47,11 +47,11 @@ namespace DungeonMasterVault.Mvvm.ViewModels
         /// <summary>
         /// Gets the selected encounter
         /// </summary>
-        public RelayCommand<Encounter> SelectEncounterCommand
+        public RelayCommand<Encounter> GoToEncounterCommand
         {
             get
             {
-                return this.selectEncounterCommand ?? (this.selectEncounterCommand = new RelayCommand<Encounter>((selectedItem) =>
+                return this.gotoEncounterCommand ?? (this.gotoEncounterCommand = new RelayCommand<Encounter>((selectedItem) =>
                 {
                     if (selectedItem == null)
                     {
@@ -72,7 +72,7 @@ namespace DungeonMasterVault.Mvvm.ViewModels
         public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             // Load real data
-            encounters = new ObservableCollection<Encounter>(dataService.GetEncounters());
+            Encounters = new ObservableCollection<Encounter>(dataService.GetEncounters());
 
             base.OnNavigatedTo(parameter, mode, state);
         }

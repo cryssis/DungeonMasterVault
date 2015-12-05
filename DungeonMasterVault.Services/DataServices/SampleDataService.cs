@@ -60,7 +60,8 @@
                 {
                     ID = "R" + i,
                     Name = "R" + i + ". Sample Encounter",
-                    Adventure = "Runtime Adventure"
+                    Adventure = "Runtime Adventure",
+                    Budget = new long?(100)
                 };
                 encounters.Add(encounter);
             }
