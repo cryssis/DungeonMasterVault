@@ -35,35 +35,19 @@
         /// <returns>A encounter collection</returns>
         public IEnumerable<Encounter> GetEncounters()
         {
-            if (encounters == null)
-            {
-                InitEncounters();
-            }
-
             return encounters;
         }
 
         private void InitEncounters()
         {
-            if (encounters == null)
-            {
-                encounters = new List<Encounter>();
-            }
-            else
-            {
-                encounters.Clear();
-            }
-
-            for (var i = 1; i < 35; i++)
-            {
-                var encounter = new Encounter()
+            var Encounters = from n in Enumerable.Range(1,3)
+                             select new Encounter                
                 {
-                    ID = "R" + i,
-                    Name = "R" + i + ". Sample Encounter",
+                    ID = "R" + n,
+                    Name = "R" + n + ". Sample Encounter",
                     Adventure = "Runtime Adventure",
                     Budget = new long?(100)
-                };
-                encounters.Add(encounter);
+                };                
             }
         }
     }
