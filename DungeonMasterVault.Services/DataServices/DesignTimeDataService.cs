@@ -1,6 +1,13 @@
-﻿namespace DungeonMasterVault.Services.DataServices
+﻿// <copyright file="DesignTimeDataService.cs" company="Roberto Sobreviela">
+// Copyright (c) Roberto Sobreviela. All rights reserved.
+// Licensed under the MIT license.
+// See LICENSE file in the project root for full license information.
+// </copyright>
+
+namespace DungeonMasterVault.Services.DataServices
 {
     using System.Collections.Generic;
+    using System.Linq;
     using DungeonMasterVault.Core.Encounters;
 
     /// <summary>
@@ -8,11 +15,7 @@
     /// </summary>
     public class DesignTimeDataService : IDataService
     {
-        /// <summary>
-        /// Implementation of GetEncounter
-        /// </summary>
-        /// <param name="id">hte encounter id</param>
-        /// <returns>The encounter found</returns>
+        /// <inheritdoc />
         public Encounter GetEncounter(string id)
         {
             return new Encounter()
@@ -24,26 +27,17 @@
             };
         }
 
-        /// <summary>
-        /// Implementation of GetEncounters
-        /// </summary>
-        /// <returns>A encounter collection</returns>
+        /// <inheritdoc />
         public IEnumerable<Encounter> GetEncounters()
         {
-            var encounters = new List<Encounter>();
-            for (var i = 1; i < 10; i++)
-            {
-                var encounter = new Encounter()
-                {
-                    ID = "DS" + i.ToString(),
-                    Name = "DS" + i.ToString() + ". Design Time Encounter",
-                    Adventure = "Design Adventure",
-                    Budget = new long?(100)
-                };
-                encounters.Add(encounter);
-            }
-
-            return encounters;
+            return (from n in Enumerable.Range(1, 3)
+                    select new Encounter
+                    {
+                        ID = "DS" + n.ToString(),
+                        Name = "DS" + n.ToString() + ". Design Time Encounter",
+                        Adventure = "Design Adventure",
+                        Budget = new long?(100)
+                    }).ToList<Encounter>();
         }
     }
 }

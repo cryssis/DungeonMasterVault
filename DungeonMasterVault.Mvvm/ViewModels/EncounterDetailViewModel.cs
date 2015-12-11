@@ -23,13 +23,14 @@ namespace DungeonMasterVault.Mvvm.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="EncounterDetailViewModel"/> class.
         /// </summary>
+        /// <param name="dataService">The injected IDataService</param>
         public EncounterDetailViewModel(IDataService dataService)
         {
             this.dataService = dataService;
 
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
-                selectedEncounter = dataService.GetEncounter(string.Empty);
+                this.selectedEncounter = dataService.GetEncounter(string.Empty);
             }
         }
 
@@ -53,7 +54,7 @@ namespace DungeonMasterVault.Mvvm.ViewModels
             base.OnNavigatedTo(parameter, mode, state);
 
             string id = (string)parameter;
-            this.SelectedEncounter = dataService.GetEncounter(id);
+            this.SelectedEncounter = this.dataService.GetEncounter(id);
         }
     }
 }

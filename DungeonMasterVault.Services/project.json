@@ -3,6 +3,7 @@
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "MvvmLightLibs": "5.2.0",
     "Newtonsoft.Json": "7.0.1",
+    "StyleCop.Analyzers": "1.0.0-rc2",
     "Template10": "1.0.8"
   },
   "frameworks": {

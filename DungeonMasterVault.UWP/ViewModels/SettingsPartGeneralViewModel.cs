@@ -26,6 +26,9 @@ namespace DungeonMasterVault.Mvvm.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether The Light Theme is used
+        /// </summary>
         public bool UseLightThemeButton
         {
             get
@@ -36,7 +39,7 @@ namespace DungeonMasterVault.Mvvm.ViewModels
             set
             {
                 this.settings.AppTheme = value ? ApplicationTheme.Light : ApplicationTheme.Dark;
-                base.RaisePropertyChanged();
+                this.RaisePropertyChanged();
             }
         }
     }

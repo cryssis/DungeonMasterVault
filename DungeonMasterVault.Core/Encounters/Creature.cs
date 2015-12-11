@@ -407,7 +407,7 @@ namespace DungeonMasterVault.Core.Encounters
         }
 
         /// <summary>
-        /// Returns a copy of this Creature
+        /// Creates a new instance of this Creature with the same values
         /// </summary>
         /// <returns>Returns a copy of this Creature</returns>
         public object Clone()

@@ -29,45 +29,30 @@ namespace DungeonMasterVault.UWP
         public App()
         {
             this.InitializeComponent();
-            SplashFactory = (e) => new Views.Splash(e);
+            this.SplashFactory = (e) => new Views.Splash(e);
 
             this.settings = SettingsService.Instance;
-            RequestedTheme = this.settings.AppTheme;
-            CacheMaxDuration = this.settings.CacheMaxDuration;
-            ShowShellBackButton = this.settings.UseShellBackButton;
+            this.RequestedTheme = this.settings.AppTheme;
+            this.CacheMaxDuration = this.settings.CacheMaxDuration;
+            this.ShowShellBackButton = this.settings.UseShellBackButton;
         }
 
-        /// <summary>
-        /// OnInitializeAsync implementation.
-        /// </summary>
-        /// <remarks>
-        /// Runs even if restored from state.
-        /// </remarks>
-        /// <param name="args">The arguments from the activation.</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
         {
-            var keys = PageKeys<Pages>();
+            var keys = this.PageKeys<Pages>();
             keys.Add(Pages.Main, typeof(MainPage));
             keys.Add(Pages.Settings, typeof(SettingsPage));
             keys.Add(Pages.Encounters, typeof(EncountersPage));
             keys.Add(Pages.EncounterDetail, typeof(EncounterDetailPage));
 
             // Setting up the hamburger shell
-            var nav = NavigationServiceFactory(BackButton.Attach, ExistingContent.Include);
+            var nav = this.NavigationServiceFactory(BackButton.Attach, ExistingContent.Include);
             Window.Current.Content = new Views.Shell(nav);
             await Task.Yield();
         }
 
-        /// <summary>
-        /// The OnStartAsync implementation.
-        /// </summary>
-        /// <remarks>
-        /// Runs only when not restored from a state.
-        /// </remarks>
-        /// <param name="startKind">The kind of App start.</param>
-        /// <param name="args">The arguments from the activation.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        /// <inheritdoc />
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
             // Perform any long-running load
