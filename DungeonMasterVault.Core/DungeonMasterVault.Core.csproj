@@ -117,6 +117,7 @@
     <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Encounters\Adventure.cs" />
     <Compile Include="Monsters\MonsterStat.cs" />
     <Compile Include="Dice\DieResult.cs" />
     <Compile Include="Dice\DieRoll.cs" />

@@ -8,6 +8,7 @@ namespace DungeonMasterVault.Mvvm.ViewModels
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using DungeonMasterVault.Core.Encounters;
     using GalaSoft.MvvmLight.Command;
     using Services.DataServices;
@@ -19,6 +20,7 @@ namespace DungeonMasterVault.Mvvm.ViewModels
     public class EncountersViewModel : ViewModelBase
     {
         private readonly IDataService dataService;
+        private List<Adventure> adventures;
         private ObservableCollection<Encounter> encounters;
         private RelayCommand<Encounter> gotoEncounterCommand;
 
@@ -33,8 +35,17 @@ namespace DungeonMasterVault.Mvvm.ViewModels
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
                 this.Encounters = new ObservableCollection<Encounter>(dataService.GetEncounters());
+
+                var adventures = this.encounters.GroupBy(x => x.Adventure)
+                    .Select(x => new Adventure { Title = x.Key, Encounters = x.ToList() });
+                this.adventures = adventures.ToList();
             }
         }
+
+        /// <summary>
+        /// Gets or sets the Adventure groups
+        /// </summary>
+        public List<Adventure> Adventures { get; set; }
 
         /// <summary>
         /// Gets or sets the encounter collection
@@ -74,6 +85,9 @@ namespace DungeonMasterVault.Mvvm.ViewModels
         {
             // Load real data
             this.Encounters = new ObservableCollection<Encounter>(this.dataService.GetEncounters());
+            var adventures = this.encounters.GroupBy(x => x.Adventure)
+                    .Select(x => new Adventure { Title = x.Key, Encounters = x.ToList() });
+            this.adventures = adventures.ToList();
 
             base.OnNavigatedTo(parameter, mode, state);
         }
