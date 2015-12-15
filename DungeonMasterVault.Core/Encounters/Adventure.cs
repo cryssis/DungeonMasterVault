@@ -6,7 +6,7 @@
 
 namespace DungeonMasterVault.Core.Encounters
 {
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
     using Template10.Mvvm;
 
@@ -15,7 +15,7 @@ namespace DungeonMasterVault.Core.Encounters
     /// </summary>
     public class Adventure : BindableBase
     {
-        private List<Encounter> encounters;
+        private ObservableCollection<Encounter> encounters;
         private string title;
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace DungeonMasterVault.Core.Encounters
         /// Gets or sets the adventure's encounter collection.
         /// </summary>
         [DataMember]
-        public List<Encounter> Encounters
+        public ObservableCollection<Encounter> Encounters
         {
             get
             {

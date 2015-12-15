@@ -36,16 +36,20 @@ namespace DungeonMasterVault.Mvvm.ViewModels
             {
                 this.Encounters = new ObservableCollection<Encounter>(dataService.GetEncounters());
 
-                var adventures = this.encounters.GroupBy(x => x.Adventure)
-                    .Select(x => new Adventure { Title = x.Key, Encounters = x.ToList() });
-                this.adventures = adventures.ToList();
+                var adv = this.encounters.GroupBy(x => x.Adventure)
+                    .Select(x => new Adventure { Title = x.Key, Encounters = new ObservableCollection<Encounter>(x.ToList()) });
+                this.adventures = adv.ToList();
             }
         }
 
         /// <summary>
         /// Gets or sets the Adventure groups
         /// </summary>
-        public List<Adventure> Adventures { get; set; }
+        public List<Adventure> Adventures
+        {
+            get { return this.adventures; }
+            set { this.Set(ref this.adventures, value); }
+        }
 
         /// <summary>
         /// Gets or sets the encounter collection
@@ -85,9 +89,9 @@ namespace DungeonMasterVault.Mvvm.ViewModels
         {
             // Load real data
             this.Encounters = new ObservableCollection<Encounter>(this.dataService.GetEncounters());
-            var adventures = this.encounters.GroupBy(x => x.Adventure)
-                    .Select(x => new Adventure { Title = x.Key, Encounters = x.ToList() });
-            this.adventures = adventures.ToList();
+            var adv = this.encounters.GroupBy(x => x.Adventure)
+                    .Select(x => new Adventure { Title = x.Key, Encounters = new ObservableCollection<Encounter>(x.ToList()) });
+            this.adventures = adv.ToList();
 
             base.OnNavigatedTo(parameter, mode, state);
         }

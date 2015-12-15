@@ -9,7 +9,36 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
     xmlns:local="using:DungeonMasterVault.UWP.Views"
+    xmlns:data="using:DungeonMasterVault.Core.Encounters"
     DataContext="{Binding Source={StaticResource Locator}, Path=EncountersViewModel}">
+
+    <Page.Resources>
+        <DataTemplate x:Key="EncounterEntryTemplate" x:DataType="data:Encounter">
+            <Grid Height="110" Width="360" Margin="10" Background="{ThemeResource EncounterItemBackgroundBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                    <TextBlock Text="{x:Bind Name}" Style="{StaticResource TitleTextBlockStyle}" />
+                    <TextBlock Text="{x:Bind Adventure}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="NoWrap" />
+                    <TextBlock Text="{x:Bind Budget}" Style="{StaticResource CaptionTextBlockStyle}" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="AdventureEntryTemplate" x:DataType="data:Adventure">
+            <Grid Margin="1,0,0,6">
+                <Button Foreground="{StaticResource ApplicationHeaderForegroundThemeBrush}"
+                        AutomationProperties.Name="Adventure Title"
+                        Style="{StaticResource TextBlockButtonStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{x:Bind Title}" Margin="3,-7,10,10" Style="{StaticResource HeaderTextBlockStyle}" TextWrapping="NoWrap" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
 
     <Grid x:Name="Main" Background="{StaticResource EncountersBackgroundImage}">
 
@@ -60,26 +89,21 @@
         </controls:PageHeader>
         <GridView x:Name="EncounterGridView"
                   Grid.Row="1"
-                  ItemsSource="{Binding Encounters}"
+                  ItemsSource="{x:Bind ViewModel.Encounters}"
                   Margin="19,12,19,0"
                   VerticalAlignment="Top"
                   HorizontalAlignment="Left"
-                  IsItemClickEnabled="True">
-            <GridView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Height="110" Width="360" Margin="10" Background="{ThemeResource EncounterItemBackgroundBrush}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                            <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextBlockStyle}" />
-                            <TextBlock Text="{Binding Adventure}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="NoWrap" />
-                            <TextBlock Text="{Binding Budget}" Style="{StaticResource CaptionTextBlockStyle}" />
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </GridView.ItemTemplate>
+                  IsItemClickEnabled="True"
+                  ItemTemplate="{StaticResource EncounterEntryTemplate}">
+            <GridView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate x:DataType="data:Adventure">
+                            <TextBlock Text="{x:Bind Title}" Style="{ThemeResource TitleTextBlockStyle}" />
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </GridView.GroupStyle>
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="ItemClick">
                     <core:InvokeCommandAction Command="{Binding GoToEncounterCommand}"
