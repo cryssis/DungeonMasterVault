@@ -15,10 +15,10 @@ namespace DungeonMasterVault.Core.Dice
     public class DieResult
     {
         /// <summary>
-        /// Gets or sets the type of the die
+        /// Gets or sets the number of sides
         /// </summary>
         [DataMember]
-        public int Die { get; set; }
+        public int Side { get; set; }
 
         /// <summary>
         /// Gets or sets the result of rolling the die

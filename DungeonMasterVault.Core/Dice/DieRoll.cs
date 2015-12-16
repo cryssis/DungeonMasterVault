@@ -20,8 +20,8 @@ namespace DungeonMasterVault.Core.Dice
     [DataContract]
     public class DieRoll
     {
-        private const string SingleDieRollRegexString = "?<count>([0-9]+)d?<die>([0-9]+)";
-        private const string ExtraDieRollRegexString = "(?<extra>(\\+?<extraCount>([0-9]+)d?<extraDie>([0-9]+))*)";
+        private const string SingleDieRollRegexString = "?<number>([0-9]+)d?<side>([0-9]+)";
+        private const string ExtraDieRollRegexString = "(?<extra>(\\+?<extraNumber>([0-9]+)d?<extraSide>([0-9]+))*)";
         private const string ModDieRollRegexString = "?<mod>((\\+|-)[0-9]+)?";
 
         /// <summary>
@@ -29,8 +29,8 @@ namespace DungeonMasterVault.Core.Dice
         /// </summary>
         private static Random rand = new Random();
 
-        private int count;
-        private int die;
+        private int number;
+        private int side;
         private int mod;
         private List<DieRollElement> extraRolls;
 
@@ -44,13 +44,13 @@ namespace DungeonMasterVault.Core.Dice
         /// <summary>
         /// Initializes a new instance of the <see cref="DieRoll"/> class.
         /// </summary>
-        /// <param name="count">The number of dice.</param>
-        /// <param name="die">The type of die.</param>
+        /// <param name="number">The number of dice.</param>
+        /// <param name="side">The sides of the die.</param>
         /// <param name="mod">The modifier to the roll's result.</param>
-        public DieRoll(int count, int die, int mod)
+        public DieRoll(int number, int side, int mod)
         {
-            this.count = count;
-            this.die = die;
+            this.number = number;
+            this.side = side;
             this.mod = mod;
         }
 
@@ -78,39 +78,39 @@ namespace DungeonMasterVault.Core.Dice
         /// Gets or sets the number of dice for this DieRoll
         /// </summary>
         [JsonIgnore]
-        public int Count
+        public int Number
         {
             get
             {
-                return this.count;
+                return this.number;
             }
 
             set
             {
-                if (this.count != value)
+                if (this.number != value)
                 {
-                    this.count = value;
+                    this.number = value;
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the type of die for this DieRoll
+        /// Gets or sets the number of die's side for this DieRoll
         /// </summary>
         [JsonIgnore]
-        public int Die
+        public int Side
         {
             get
             {
-                return this.die;
+                return this.side;
             }
 
             set
             {
-                if (this.die != value)
+                if (this.side != value)
                 {
-    this.die = value;
-}
+                    this.side = value;
+                }
             }
         }
 
@@ -147,8 +147,8 @@ namespace DungeonMasterVault.Core.Dice
 
             set
             {
-                this.Count = value.Count;
-                this.Die = value.Die;
+                this.Number = value.Number;
+                this.Side = value.Side;
             }
         }
 
@@ -197,8 +197,8 @@ namespace DungeonMasterVault.Core.Dice
             {
                 System.Diagnostics.Debug.Assert(value.Count > 0, "Invalid roll. The number of dice must be at least one.");
 
-                this.Count = value[0].Count;
-                this.Die = value[0].Die;
+                this.Number = value[0].Number;
+                this.Side = value[0].Side;
 
                 this.extraRolls = new List<DieRollElement>();
                 for (int i = 1; i < value.Count; i++)
@@ -216,13 +216,13 @@ namespace DungeonMasterVault.Core.Dice
         {
             get
             {
-                int total = this.Count;
+                int total = this.Number;
 
                 if (this.ExtraRolls != null)
                 {
                     foreach (DieRollElement element in this.ExtraRolls)
                     {
-                        total += element.Count;
+                        total += element.Number;
                     }
                 }
 
@@ -239,13 +239,13 @@ namespace DungeonMasterVault.Core.Dice
             get
             {
                 string text = string.Empty;
-                text += this.Count;
-                text += "d" + this.Die;
+                text += this.Number;
+                text += "d" + this.Side;
                 if (this.ExtraRolls != null && this.ExtraRolls.Count > 0)
                 {
                     foreach (DieRollElement element in this.ExtraRolls)
                     {
-                        text += "+" + element.Count + "d" + element.Die;
+                        text += "+" + element.Number + "d" + element.Side;
                     }
                 }
 
@@ -326,10 +326,10 @@ namespace DungeonMasterVault.Core.Dice
                     if (match.Success)
                     {
                         roll = new DieRoll();
-                        roll.Count = int.Parse(match.Groups["count"].Value);
-                        roll.Die = int.Parse(match.Groups["die"].Value);
+                        roll.Number = int.Parse(match.Groups["number"].Value);
+                        roll.Side = int.Parse(match.Groups["side"].Value);
 
-                        if (roll.Die == 0)
+                        if (roll.Side == 0)
                         {
                             throw new FormatException("Invalid Die Roll");
                         }
@@ -342,8 +342,8 @@ namespace DungeonMasterVault.Core.Dice
 
                             foreach (Match m in regExtra.Matches(match.Groups["extra"].Value))
                             {
-                                DieRollElement element = new DieRollElement(int.Parse(m.Groups["extraCount"].Value), int.Parse(m.Groups["extraDie"].Value));
-                                if (element.Die == 0)
+                                DieRollElement element = new DieRollElement(int.Parse(m.Groups["extraNumber"].Value), int.Parse(m.Groups["extraSide"].Value));
+                                if (element.Side == 0)
                                 {
                                     throw new FormatException("Invalid Die Roll");
                                 }
@@ -383,11 +383,11 @@ namespace DungeonMasterVault.Core.Dice
 
             foreach (DieRollElement element in this.AllRolls)
             {
-                for (int i = 0; i < element.Count; i++)
+                for (int i = 0; i < element.Number; i++)
                 {
                     DieResult res = new DieResult();
-                    res.Die = element.Die;
-                    res.Result += Random.Next(1, element.Die + 1);
+                    res.Side = element.Side;
+                    res.Result += Random.Next(1, element.Side + 1);
                     result.Total += res.Result;
                     result.Rolls.Add(res);
                 }
@@ -402,22 +402,22 @@ namespace DungeonMasterVault.Core.Dice
         /// <returns>The average result of the roll.</returns>
         public int AverageRoll()
         {
-            return (int)(this.AllRolls.Sum(roll => (Math.Floor((decimal)((roll.Die + 1) * roll.Count)) / 2)) + this.Mod);
+            return (int)(this.AllRolls.Sum(roll => (Math.Floor((decimal)((roll.Side + 1) * roll.Number)) / 2)) + this.Mod);
         }
 
         /// <summary>
         /// Returns the number of dice of a type in the roll.
         /// </summary>
-        /// <param name="die">The type of dice to count.</param>
+        /// <param name="side">The type of dice to count based on sides.</param>
         /// <returns>The number of dice for the type in the roll.</returns>
-        public int DieCount(int die)
+        public int DieCount(int side)
         {
             int count = 0;
             foreach (DieRollElement d in this.AllRolls)
             {
-                if (d.Die == die)
+                if (d.Side == side)
                 {
-                    count += d.Count;
+                    count += d.Number;
                 }
             }
 
@@ -448,7 +448,7 @@ namespace DungeonMasterVault.Core.Dice
         /// <returns>The HashCode for this DieRoll.</returns>
         public override int GetHashCode()
         {
-            int value = (this.Die << 8) * (this.Count << 4) ^ this.Mod;
+            int value = (this.Side << 8) * (this.Number << 4) ^ this.Mod;
 
             if (this.ExtraRolls != null && this.ExtraRolls.Count > 0)
             {
@@ -499,7 +499,7 @@ namespace DungeonMasterVault.Core.Dice
                 }
             }
 
-            return roll.Count == this.Count && roll.Die == this.Die && roll.Mod == this.Mod;
+            return roll.Number == this.Number && roll.Side == this.Side && roll.Mod == this.Mod;
         }
 
         /// <summary>
@@ -510,14 +510,14 @@ namespace DungeonMasterVault.Core.Dice
         {
             if (roll == null)
             {
-                this.Count = 0;
-                this.Die = 0;
+                this.Number = 0;
+                this.Side = 0;
                 this.Mod = 0;
             }
             else
             {
-                this.Count = roll.Count;
-                this.Die = roll.Die;
+                this.Number = roll.Number;
+                this.Side = roll.Side;
                 this.Mod = roll.Mod;
 
                 if (roll.ExtraRolls != null)
@@ -526,7 +526,7 @@ namespace DungeonMasterVault.Core.Dice
 
                     foreach (DieRollElement element in roll.ExtraRolls)
                     {
-                        this.ExtraRolls.Add(new DieRollElement(element.Count, element.Die));
+                        this.ExtraRolls.Add(new DieRollElement(element.Number, element.Side));
                     }
                 }
                 else

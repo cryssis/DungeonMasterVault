@@ -14,8 +14,8 @@ namespace DungeonMasterVault.Core.Dice
     /// </summary>
     public class DieRollElement : BindableBase
     {
-        private int count = default(int);
-        private int die = default(int);
+        private int number = default(int);
+        private int side = default(int);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DieRollElement"/> class.
@@ -27,12 +27,12 @@ namespace DungeonMasterVault.Core.Dice
         /// <summary>
         /// Initializes a new instance of the <see cref="DieRollElement"/> class.
         /// </summary>
-        /// <param name="count">The number of dice.</param>
-        /// <param name="die">The type of die.</param>
-        public DieRollElement(int count, int die)
+        /// <param name="number">The number of dice.</param>
+        /// <param name="side">The die's sides.</param>
+        public DieRollElement(int number, int side)
         {
-            this.Count = count;
-            this.Die = die;
+            this.Number = number;
+            this.Side = side;
         }
 
         /// <summary>
@@ -41,24 +41,24 @@ namespace DungeonMasterVault.Core.Dice
         /// <param name="roll">A DieRoll object</param>
         public DieRollElement(DieRoll roll)
         {
-            this.Count = roll.Count;
-            this.Die = roll.Die;
+            this.Number = roll.Number;
+            this.Side = roll.Side;
         }
 
         /// <summary>
         /// Gets or sets the number of Dice of this type to be rolled.
         /// </summary>
-        public int Count
+        public int Number
         {
-            get { return this.count; } set { this.Set(ref this.count, value); }
+            get { return this.number; } set { this.Set(ref this.number, value); }
         }
 
         /// <summary>
         /// Gets or sets the type of die to be rolled.
         /// </summary>
-        public int Die
+        public int Side
         {
-            get { return this.die; } set { this.Set(ref this.die, value); }
+            get { return this.side; } set { this.Set(ref this.side, value); }
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace DungeonMasterVault.Core.Dice
         {
             get
             {
-                return this.Count + "d" + this.Die;
+                return this.Number + "d" + this.Side;
             }
         }
 
@@ -128,7 +128,7 @@ namespace DungeonMasterVault.Core.Dice
 
             DieRollElement element = (DieRollElement)obj;
 
-            return this.Count == element.Count && this.Die == element.Die;
+            return this.Number == element.Number && this.Side == element.Side;
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace DungeonMasterVault.Core.Dice
         /// <returns>The HashCode for the DieRollElement.</returns>
         public override int GetHashCode()
         {
-            return (this.Count << 8) | this.Die;
+            return (this.Number << 8) | this.Side;
         }
 
         /// <summary>
@@ -148,15 +148,15 @@ namespace DungeonMasterVault.Core.Dice
         {
             int result = 0;
 
-            if (this.Die == 1)
+            if (this.Side == 1)
             {
-                result = this.Die * this.Count;
+                result = this.Side * this.Number;
             }
-            else if (this.Die > 1)
+            else if (this.Side > 1)
             {
-                for (int i = 0; i < this.Count; i++)
+                for (int i = 0; i < this.Number; i++)
                 {
-                    result += DieRoll.Random.Next(1, this.Die + 1);
+                    result += DieRoll.Random.Next(1, this.Side + 1);
                 }
             }
 
