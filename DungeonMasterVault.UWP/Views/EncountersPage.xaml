@@ -10,6 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
     xmlns:local="using:DungeonMasterVault.UWP.Views"
     xmlns:data="using:DungeonMasterVault.Core.Encounters"
+    xmlns:dataservices="using:DungeonMasterVault.Services.DataServices"
     DataContext="{Binding Source={StaticResource Locator}, Path=EncountersViewModel}">
 
     <Page.Resources>
@@ -38,6 +39,11 @@
                 </Button>
             </Grid>
         </DataTemplate>
+
+        <CollectionViewSource x:Name="adventuresViewSource"
+                              Source="{Binding Adventures}"
+                              IsSourceGrouped="True"
+                              ItemsPath="Encounters" />
     </Page.Resources>
 
     <Grid x:Name="Main" Background="{StaticResource EncountersBackgroundImage}">
@@ -88,13 +94,21 @@
             </interactivity:Interaction.Behaviors>
         </controls:PageHeader>
         <GridView x:Name="EncounterGridView"
+                  AutomationProperties.AutomationId="EncounterGridView"
+                  AutomationProperties.Name="AdventureList"
                   Grid.Row="1"
-                  ItemsSource="{x:Bind ViewModel.Encounters}"
                   Margin="19,12,19,0"
                   VerticalAlignment="Top"
                   HorizontalAlignment="Left"
+                  ItemsSource="{Binding Source={StaticResource adventuresViewSource}}"
+                  ItemTemplate="{StaticResource EncounterEntryTemplate}"
                   IsItemClickEnabled="True"
-                  ItemTemplate="{StaticResource EncounterEntryTemplate}">
+                  SelectionMode="None">
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VariableSizedWrapGrid Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
             <GridView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
@@ -102,6 +116,11 @@
                             <TextBlock Text="{x:Bind Title}" Style="{ThemeResource TitleTextBlockStyle}" />
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
+                    <GroupStyle.Panel>
+                        <ItemsPanelTemplate>
+                            <VariableSizedWrapGrid Orientation="Horizontal" Margin="0,0,80,0" />
+                        </ItemsPanelTemplate>
+                    </GroupStyle.Panel>
                 </GroupStyle>
             </GridView.GroupStyle>
             <interactivity:Interaction.Behaviors>

@@ -6,7 +6,9 @@
 
 namespace DungeonMasterVault.Services.DataServices
 {
+    using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using DungeonMasterVault.Core.Encounters;
 
@@ -15,29 +17,78 @@ namespace DungeonMasterVault.Services.DataServices
     /// </summary>
     public class DesignTimeDataService : IDataService
     {
-        /// <inheritdoc />
-        public Encounter GetEncounter(string id)
+        private ObservableCollection<Adventure> allAdventures = new ObservableCollection<Adventure>();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DesignTimeDataService"/> class.
+        /// </summary>
+        public DesignTimeDataService()
         {
-            return new Encounter()
+            this.allAdventures = new ObservableCollection<Adventure>();
+
+            var adventures = from a in Enumerable.Range(1, 3)
+                             select new Adventure
+                             {
+                                 Code = "D" + a.ToString(),
+                                 Title = "Adventure " + a.ToString(),
+                             };
+
+            foreach (var a in adventures)
             {
-                ID = "DS" + 1,
-                Name = "DS" + 1 + ". Design Time Encounter",
-                Adventure = "Design Adventure",
-                Budget = new long?(100)
-            };
+                a.Encounters = new ObservableCollection<Encounter>();
+
+                for (int e = 1; e <= 4; e++)
+                {
+                    var encounter = new Encounter()
+                    {
+                        ID = a.Code + "." + "D" + e,
+                        Name = a.Code + "." + "D" + e + ". Design Time Encounter",
+                        Adventure = a.Code,
+                        Budget = new long?(100)
+                    };
+                    a.Encounters.Add(encounter);
+                }
+
+                this.allAdventures.Add(a);
+            }
+        }
+
+        /// <summary>
+        /// Gets a collection of all adventures
+        /// </summary>
+        public ObservableCollection<Adventure> AllAdventures
+        {
+            get { return this.allAdventures; }
         }
 
         /// <inheritdoc />
-        public IEnumerable<Encounter> GetEncounters()
+        public IEnumerable<Adventure> GetAdventures()
         {
-            return (from n in Enumerable.Range(1, 3)
-                    select new Encounter
-                    {
-                        ID = "DS" + n.ToString(),
-                        Name = "DS" + n.ToString() + ". Design Time Encounter",
-                        Adventure = "Design Adventure",
-                        Budget = new long?(100)
-                    }).ToList<Encounter>();
+            return this.allAdventures;
+        }
+
+        /// <inheritdoc />
+        public Adventure GetAdventure(string code)
+        {
+            var matches = this.allAdventures.Where((adventure) => adventure.Code.Equals(code));
+            if (matches.Count() == 1)
+            {
+                return matches.First();
+            }
+
+            return null;
+        }
+
+        /// <inheritdoc />
+        public Encounter GetEncounter(string id)
+        {
+            var matches = this.allAdventures.SelectMany(adventure => adventure.Encounters).Where((encounter) => encounter.ID.Equals(id));
+            if (matches.Count() == 1)
+            {
+                return matches.First();
+            }
+
+            return null;
         }
     }
 }

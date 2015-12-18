@@ -15,10 +15,17 @@ namespace DungeonMasterVault.Services.DataServices
     public interface IDataService
     {
         /// <summary>
-        /// Retrieves a collection of Encounters.
+        /// Retrieves a collection of Adventures.
         /// </summary>
-        /// <returns>A collection of encounters</returns>
-        IEnumerable<Encounter> GetEncounters();
+        /// <returns>A collection of adventures.</returns>
+        IEnumerable<Adventure> GetAdventures();
+
+        /// <summary>
+        /// Retrieves an Adventure by Code
+        /// </summary>
+        /// <param name="code">The Adventure Code.</param>
+        /// <returns>The Adventure with Code in the collection</returns>
+        Adventure GetAdventure(string code);
 
         /// <summary>
         ///  Retrieves a Encounter by ID

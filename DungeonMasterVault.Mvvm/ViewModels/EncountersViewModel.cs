@@ -20,9 +20,9 @@ namespace DungeonMasterVault.Mvvm.ViewModels
     public class EncountersViewModel : ViewModelBase
     {
         private readonly IDataService dataService;
-        private List<Adventure> adventures;
-        private ObservableCollection<Encounter> encounters;
         private RelayCommand<Encounter> gotoEncounterCommand;
+
+        private ObservableCollection<Adventure> adventures;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EncountersViewModel"/> class.
@@ -34,30 +34,17 @@ namespace DungeonMasterVault.Mvvm.ViewModels
 
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
-                this.Encounters = new ObservableCollection<Encounter>(dataService.GetEncounters());
-
-                var adv = this.encounters.GroupBy(x => x.Adventure)
-                    .Select(x => new Adventure { Title = x.Key, Encounters = new ObservableCollection<Encounter>(x.ToList()) });
-                this.adventures = adv.ToList();
+                this.Adventures = new ObservableCollection<Adventure>(this.dataService.GetAdventures());
             }
         }
 
         /// <summary>
         /// Gets or sets the Adventure groups
         /// </summary>
-        public List<Adventure> Adventures
+        public ObservableCollection<Adventure> Adventures
         {
             get { return this.adventures; }
             set { this.Set(ref this.adventures, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets the encounter collection
-        /// </summary>
-        public ObservableCollection<Encounter> Encounters
-        {
-            get { return this.encounters; }
-            set { this.Set(ref this.encounters, value); }
         }
 
         /// <summary>
@@ -88,10 +75,7 @@ namespace DungeonMasterVault.Mvvm.ViewModels
         public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             // Load real data
-            this.Encounters = new ObservableCollection<Encounter>(this.dataService.GetEncounters());
-            var adv = this.encounters.GroupBy(x => x.Adventure)
-                    .Select(x => new Adventure { Title = x.Key, Encounters = new ObservableCollection<Encounter>(x.ToList()) });
-            this.adventures = adv.ToList();
+            this.Adventures = new ObservableCollection<Adventure>(this.dataService.GetAdventures());
 
             base.OnNavigatedTo(parameter, mode, state);
         }

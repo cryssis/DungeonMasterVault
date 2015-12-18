@@ -61,7 +61,7 @@ namespace DungeonMasterVault.Core.Encounters
         }
 
         /// <summary>
-        /// Gets or sets the Adventure the Encounter belongs to
+        /// Gets or sets the Adventure Code the Encounter belongs to
         /// </summary>
         [DataMember]
         public string Adventure
